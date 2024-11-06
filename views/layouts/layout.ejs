@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>NikoPick</title>
+    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/styles/importer.css">
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+<header>
+    <div class="nav-bar">
+        <% if(req.me) { %>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        <% } %>
+        <div class="logo" style="margin-left: 10px;">
+            <img src="/images/nikopick-logo.jpeg" alt="NikoPick Logo">
+        </div>
+        <% if(!req.me) { %>
+            <div class="spacer"></div>
+            <a href="#">
+                <button onclick="window.location.href='/documents'" class="nav-item custom-button" style="margin-right: 10px;">ANMELDEN</button>
+            </a>
+        <% } %>
+    </div>
+</header>
+
+<main>
+    <%- body %>
+</main>
+
+<footer class="custom-footer">
+    <div class="footer-content">
+        <p>© 2024 NikoPick. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="/dependencies/sails.io.js"></script>
+<script src="/dependencies/vue.global.js"></script>
+<script src="/dependencies/bootstrap.bundle.min.js"></script>
+<script src="/dependencies/vue-router.global.js"></script>
+<script src="/dependencies/vuetify.min.js"></script>
+<script>
+  document.getElementById('menuToggle').addEventListener('click', function() {
+    var drawer = document.getElementById('drawer');
+    var body = document.body;
+    var main = document.querySelector('main');
+    var header = document.querySelector('header');
+    var footer = document.querySelector('footer');
+
+    if (drawer.style.width === '250px') {
+      drawer.style.width = '0';
+      // Remove styles when drawer is closed
+      if (window.innerWidth > 768) { 
+        body.style.marginLeft = '0';
+        main.style.marginLeft = '0';
+        header.style.marginLeft = '0';
+        footer.style.marginLeft = '0';
+      }
+    } else {
+      drawer.style.width = '250px';
+      if (window.innerWidth > 768) {
+        body.style.marginLeft = '125px';
+        main.style.marginLeft = '125px';
+        header.style.marginLeft = '125px';
+        footer.style.marginLeft = '0';
+      }
+    }
+  });
+
+  // Close the drawer when clicking outside of it on mobile
+  window.addEventListener('click', function(event) {
+    var drawer = document.getElementById('drawer');
+    if (event.target === drawer || drawer.contains(event.target) || event.target === document.getElementById('menuToggle')) {
+      // Click inside drawer or toggle button
+      return;
+    } else {
+      // Click outside drawer
+      if (drawer.style.width === '250px' && window.innerWidth <= 768) {
+        drawer.style.width = '0';
+      }
+    }
+  });
+
+</script>
+</body>
+</html>
