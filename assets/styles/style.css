@@ -224,12 +224,24 @@ ul {
     border-bottom: 5px solid #b0b0b0; /* Graue untere Linie */
     text-align: center; /* Zentriert das Bild innerhalb der Section */
     padding: 20px 0; /* Vertikaler Abstand für Luft um das Bild */
-  }
+}
 
-  .flavors-image {
-    max-width: 100%; /* Passt das Bild an die Bildschirmbreite an */
-    height: auto; /* Hält das Seitenverhältnis des Bildes */
-  }
+.flavors-section img {
+    max-width: 100%; /* Bild passt sich der Breite der Section an */
+    height: auto; /* Höhe passt sich automatisch an, um das Seitenverhältnis zu erhalten */
+}
+
+@media (max-width: 768px) {
+    .flavors-section {
+        padding: 15px 0; /* Weniger vertikaler Abstand auf kleineren Bildschirmen */
+    }
+}
+
+@media (max-width: 480px) {
+    .flavors-section {
+        padding: 10px 0; /* Noch weniger Abstand auf sehr kleinen Bildschirmen */
+    }
+}
 
   /* Styling des Buttons für nav bar */
   .custom-button {
